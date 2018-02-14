@@ -87,6 +87,7 @@ public class setAlarmas extends AppCompatActivity
                 nroControles = Integer.valueOf(adapterView.getItemAtPosition(pos).toString());
                 calcularTotal();
             }
+
             @Override public void onNothingSelected(AdapterView<?> parent){}
         });
         String datos = leerNotificacion();
