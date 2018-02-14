@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">GameShark - Alarmas</string>
+    <string name="entrar">Entrar >>></string>
+    <string name="tv1">Tele 1</string>
+    <string name="tv2">Tele 2</string>
+    <string name="tv3">Tele 3</string>
+    <string name="tv4">Tele 4</string>
+    <string name="tv5">Tele 5</string>
+    <string name="tv6">Tele 6</string>
+    <string name="tv7">Tele 7</string>
+    <string name="tv8">Tele 8</string>
+    <string name="tv9">Tele 9</string>
+    <string name="tv10">Tele Extra</string>
+    <string name="HoradeEntrada">Hora de entrada</string>
+    <string name="HoradeSalida">Hora de salida</string>
+    <string name="listo">Listo!</string>
+    <string name="total">Total:</string>
+    <string-array name="cantidadControles">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+</resources>
