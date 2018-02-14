@@ -43,7 +43,7 @@ public class setAlarmas extends AppCompatActivity
     private TextView total;
     private double extra = 0;
     private int nroControles;
-    private String nomArch = "prueba3.txt";
+    private String nomArch = "prueba5.txt";
 
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -108,13 +108,29 @@ public class setAlarmas extends AppCompatActivity
             case 2:
                 if(datos[0].contains(":"))
                     ent.setText(datos[0]);
-                else
-                    deuda.setText(datos[1]);
+                sp.setSelection(Integer.parseInt(datos[1]));
                 break;
             case 3:
                 ent.setText(datos[0]);
+                if(!datos[1].equals("0"))
+                {
+                    deuda.setText(datos[1]);
+                    sp.setSelection(Integer.parseInt(datos[2]));
+                }else if(datos[1].contains(":"))
+                {
+                    sal.setText(datos[1]);
+                    sp.setSelection(Integer.parseInt(datos[2]));
+                }else
+                {
+                    deuda.setText(datos[1]);
+                    sp.setSelection(Integer.parseInt(datos[2]));
+                }
+                break;
+            case 4:
+                ent.setText(datos[0]);
                 sal.setText(datos[1]);
                 deuda.setText(datos[2]);
+                sp.setSelection(Integer.parseInt(datos[3]));
         }
     }
 
@@ -123,7 +139,8 @@ public class setAlarmas extends AppCompatActivity
         String textoDeArch = "";
         textoDeArch += (String.valueOf(ent.getText().toString() == "" ? "" : ent.getText().toString()+"'"));
         textoDeArch += (String.valueOf(sal.getText().toString() == "" ? "" : sal.getText().toString()+"'"));
-        textoDeArch += ((String.valueOf(deuda.getText()) == "0" || String.valueOf(deuda.getText())=="" )? "" : deuda.getText().toString());
+        textoDeArch += (String.valueOf(deuda.getText())=="" ? "" : deuda.getText().toString())+"'";
+        textoDeArch += String.valueOf(sp.getSelectedItemPosition());
         try
         {
             OutputStreamWriter fout=
