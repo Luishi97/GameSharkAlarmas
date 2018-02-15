@@ -1,5 +1,6 @@
 package com.example.luishi.gameshark_alarmas;
 
+import android.app.AlarmManager;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -150,6 +151,7 @@ public class setAlarmas extends AppCompatActivity
 
             fout.write(textoDeArch);
             fout.close();
+
             leerNotificacion();
         }
         catch (Exception e)
