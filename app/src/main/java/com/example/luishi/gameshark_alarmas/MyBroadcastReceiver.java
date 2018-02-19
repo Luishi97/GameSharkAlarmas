@@ -30,24 +30,23 @@ public class MyBroadcastReceiver extends BroadcastReceiver
     @Override
     public void onReceive(Context context, Intent intent)
     {
-        tv = intent.getExtras().getString("tv");
         mp = MediaPlayer.create(context, R.raw.alrm);
         mp.start();
         notif = new NotificationCompat.Builder(context);
         this.context = context;
         notif.setAutoCancel(true);
+        tv = intent.getExtras().getString("tele");
         notificaion();
     }
 
     private void notificaion()
     {
-        Toast.makeText(context, "Alarm....", Toast.LENGTH_LONG).show();
         notif.setSmallIcon(R.mipmap.ic_launcher);
-        notif.setTicker("Nueva notificacion");
+        notif.setTicker("Tv "+this.tv);
         notif.setPriority(Notification.PRIORITY_MAX);
         notif.setWhen(System.currentTimeMillis());
-        notif.setContentTitle("Titulo");
-        notif.setContentText("Tutorial auto notificaciones");
+        notif.setContentTitle("Game Shark - Alarma");
+        notif.setContentText("Hora de la tv "+this.tv);
         notif.setPriority(Notification.PRIORITY_HIGH);
         notif.setVisibility(VISIBILITY_PUBLIC);
         notif.setLights(Color.BLUE, 1000, 5000);
@@ -58,7 +57,7 @@ public class MyBroadcastReceiver extends BroadcastReceiver
 
         Intent i = new Intent(context, setAlarmas.class);
         i.putExtra("tv",this.tv);
-        PendingIntent pi = PendingIntent.getActivity(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pi = PendingIntent.getActivity(context, Integer.parseInt(this.tv), i, 0);
 
         notif.setContentIntent(pi);
 

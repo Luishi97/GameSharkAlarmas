@@ -175,10 +175,17 @@ public class setAlarmas extends AppCompatActivity
     public void alarma()
     {
         Intent i = new Intent(this, MyBroadcastReceiver.class);
-        i.putExtra("tv", tv);
-        PendingIntent pi = PendingIntent.getBroadcast(this.getApplicationContext(), 234324243, i, 0);
+        i.putExtra("tele", this.tv);
+
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(sal.getText().toString().split(":")[0]));
+        calendar.set(Calendar.MINUTE, Integer.parseInt(sal.getText().toString().split(":")[1]));
+
+        PendingIntent pi = PendingIntent.getBroadcast(this.getApplicationContext(), Integer.parseInt(this.tv), i, Integer.parseInt(this.tv));
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+(10000), pi);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis()-800, pi);
         Toast.makeText(this, "Alarma puesta",Toast.LENGTH_SHORT).show();
     }
 
