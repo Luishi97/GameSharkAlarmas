@@ -1,15 +1,25 @@
 package com.example.luishi.gameshark_alarmas;
 
 import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.AlarmClock;
 import android.support.annotation.IntegerRes;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.ActionProvider;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -29,6 +39,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.nio.file.Files;
 import java.util.Calendar;
+
+import static android.app.Notification.VISIBILITY_PUBLIC;
 
 /**
  * Created by Luishi on 10/2/2018.
@@ -151,13 +163,23 @@ public class setAlarmas extends AppCompatActivity
 
             fout.write(textoDeArch);
             fout.close();
-
+            alarma();
             leerNotificacion();
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
+    }
+
+    public void alarma()
+    {
+        Intent i = new Intent(this, MyBroadcastReceiver.class);
+        i.putExtra("tv", tv);
+        PendingIntent pi = PendingIntent.getBroadcast(this.getApplicationContext(), 234324243, i, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+(10000), pi);
+        Toast.makeText(this, "Alarma puesta",Toast.LENGTH_SHORT).show();
     }
 
     public String leerNotificacion()
