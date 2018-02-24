@@ -56,7 +56,7 @@ public class setAlarmas extends AppCompatActivity
     private TextView total;
     private double extra = 0;
     private int nroControles;
-    private String nomArch = "prueba5.txt";
+    private String nomArch = "prueba11";
 
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -66,6 +66,8 @@ public class setAlarmas extends AppCompatActivity
         tv = getIntent().getExtras().getString("tv");
         TextView tv = findViewById(R.id.titulo);
         tv.setText("Tele "+this.tv);
+
+        nomArch += (this.tv+".txt");
 
         if (this.tv.equals("10"))
             esExtra();
@@ -174,19 +176,21 @@ public class setAlarmas extends AppCompatActivity
 
     public void alarma()
     {
-        Intent i = new Intent(this, MyBroadcastReceiver.class);
-        i.putExtra("tele", this.tv);
+        //if(sal.getText().toString().equals(""))
+        //{
+            Intent i = new Intent(this, MyBroadcastReceiver.class);
+            i.putExtra("tele", this.tv);
 
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(System.currentTimeMillis());
+            calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(sal.getText().toString().split(":")[0]));
+            calendar.set(Calendar.MINUTE, Integer.parseInt(sal.getText().toString().split(":")[1]));
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(sal.getText().toString().split(":")[0]));
-        calendar.set(Calendar.MINUTE, Integer.parseInt(sal.getText().toString().split(":")[1]));
-
-        PendingIntent pi = PendingIntent.getBroadcast(this.getApplicationContext(), Integer.parseInt(this.tv), i, Integer.parseInt(this.tv));
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis()-800, pi);
-        Toast.makeText(this, "Alarma puesta",Toast.LENGTH_SHORT).show();
+            PendingIntent pi = PendingIntent.getBroadcast(this.getApplicationContext(), Integer.parseInt(this.tv), i, Integer.parseInt(this.tv));
+            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() - 800, pi);
+            Toast.makeText(this, "Alarma puesta", Toast.LENGTH_SHORT).show();
+        //}
     }
 
     public String leerNotificacion()
@@ -332,6 +336,12 @@ public class setAlarmas extends AppCompatActivity
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    public void ponerCero(View view)
+    {
+        EditText e = findViewById(R.id.Salida);
+        e.setText("");
     }
 
 }

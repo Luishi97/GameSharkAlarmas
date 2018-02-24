@@ -52,13 +52,24 @@
             android:layout_margin="50px"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/Salida"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:editable="false"
-                android:hint="HH:MM"
-                android:onClick="obtenerHoraSalida" />
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/Salida"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:hint="HH:MM"
+                    android:onClick="obtenerHoraSalida" />
+                <Button
+                    android:id="@+id/ponerCero"
+                    android:text="Cero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="ponerCero"/>
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
