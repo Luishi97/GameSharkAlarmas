@@ -1,5 +1,6 @@
 package com.example.luishi.gameshark_alarmas;
 
+import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -11,6 +12,7 @@ import android.graphics.Color;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.AlarmClock;
@@ -25,6 +27,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -215,12 +218,14 @@ public class setAlarmas extends AppCompatActivity
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     private void esExtra()
     {
-        TableRow tr = findViewById(R.id.maquina);
+        LinearLayout tr = findViewById(R.id.maquina);
         tr.removeAllViews();
 
         Spinner sp = new Spinner(this);
+        sp.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         String [] tvs = {"Tele 1", "Tele 2", "Tele 3", "Tele 4", "Tele 5", "Tele 6", "Tele 7", "Tele 8", "Tele 9"};
         sp.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tvs));
         sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -236,6 +241,7 @@ public class setAlarmas extends AppCompatActivity
         Toast.makeText(adapterView.getContext(),
                 (String) adapterView.getItemAtPosition(pos), Toast.LENGTH_SHORT).show();
         this.tv = adapterView.getItemAtPosition(pos).toString().split(" ")[1];
+        this.nomArch = "aux"+this.tv+"txt";
         calcularTotal();
     }
 
